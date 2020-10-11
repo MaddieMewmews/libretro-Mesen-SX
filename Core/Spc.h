@@ -8,6 +8,7 @@
 #include "stdafx.h"
 #include "SpcTypes.h"
 #include "CpuTypes.h"
+#include "DebugTypes.h"
 #include "SpcTimer.h"
 #include "../Utilities/ISerializable.h"
 
@@ -313,6 +314,8 @@ public:
 	uint8_t* GetSpcRom();
 
 	void Serialize(Serializer &s) override;
+
+	void SetReg(SpcRegister reg, uint8_t value);
 
 #ifdef DUMMYSPC
 private:
