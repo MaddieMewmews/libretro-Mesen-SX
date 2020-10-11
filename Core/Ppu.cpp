@@ -945,7 +945,7 @@ void Ppu::RenderTilemap()
 
 	TileData* tileData  = _layerData[layerIndex].Tiles;
 
-	uint8_t mosaicCounter = applyMosaic ? (_drawStartX % _state.MosaicSize) : 0;
+	uint8_t mosaicCounter = applyMosaic ? _state.MosaicSize - (_drawStartX % _state.MosaicSize) : 0;
 
 	uint8_t lookupIndex;
 	uint8_t chrDataOffset;
@@ -984,7 +984,7 @@ void Ppu::RenderTilemap()
 		uint8_t priority = (tilemapData & 0x2000) ? highPriority : normalPriority;
 
 		if(applyMosaic) {
-			if(mosaicCounter == 0) {
+			if(mosaicCounter == _state.MosaicSize) {
 				mosaicCounter = 1;
 				if(hiResMode) {
 					color = hiresSubColor;
@@ -993,9 +993,6 @@ void Ppu::RenderTilemap()
 				_mosaicPriority[layerIndex] = priority;
 			} else {
 				mosaicCounter++;
-				if(mosaicCounter == _state.MosaicSize) {
-					mosaicCounter = 0;
-				}
 				color = _mosaicColor[layerIndex] & 0xFF;
 				paletteIndex = _mosaicColor[layerIndex] >> 8;
 				priority = _mosaicPriority[layerIndex];
@@ -1107,7 +1104,7 @@ void Ppu::RenderTilemapMode7()
 		//Keep the "scanline" to what it was at the start of this mosaic block
 		realY -= _state.MosaicSize - _mosaicScanlineCounter;
 	}
-	uint8_t mosaicCounter = applyMosaic ? (_drawStartX % _state.MosaicSize) : 0;
+	uint8_t mosaicCounter = applyMosaic ? _state.MosaicSize - (_drawStartX % _state.MosaicSize) : 0;
 
 	int32_t xValue = (
 		((_state.Mode7.Matrix[0] * clip(hScroll - centerX)) & ~63) +
@@ -1174,15 +1171,12 @@ void Ppu::RenderTilemapMode7()
 		}
 
 		if(applyMosaic) {
-			if (mosaicCounter == 0) {
+			if(mosaicCounter == _state.MosaicSize) {
 				mosaicCounter = 1;
 				_mosaicColor[layerIndex] = colorIndex;
 				_mosaicPriority[layerIndex] = priority;
 			} else {
 				mosaicCounter++;
-				if(mosaicCounter == _state.MosaicSize) {
-					mosaicCounter = 0;
-				}
 				colorIndex = _mosaicColor[layerIndex];
 				priority = _mosaicPriority[layerIndex];
 			}
