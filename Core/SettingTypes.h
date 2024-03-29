@@ -308,6 +308,8 @@ struct EmulationConfig
 	int64_t BsxCustomDate = -1;
 
 	bool AllowInvalidInput = false;
+
+	bool EnableHleCoprocessor = false;
 };
 
 struct GameboyConfig

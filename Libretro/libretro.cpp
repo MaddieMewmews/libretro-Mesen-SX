@@ -53,6 +53,7 @@ static constexpr const char* MesenOverclockType = "mesen-s_overclock_type";
 static constexpr const char* MesenSuperFxOverclock = "mesen-s_superfx_overclock";
 static constexpr const char* MesenGbModel = "mesen-s_gbmodel";
 static constexpr const char* MesenGbSgb2 = "mesen-s_sgb2";
+static constexpr const char* MesenHLE = "mesen-s_hle_coprocessor";
 
 extern "C" {
 	void logMessage(retro_log_level level, const char* message)
@@ -126,6 +127,7 @@ extern "C" {
 			{ MesenOverclockType, "Overclock Type; Before NMI|After NMI" },
 			{ MesenSuperFxOverclock, "Super FX Clock Speed; 100%|200%|300%|400%|500%|1000%" },
 			{ MesenRamState, "Default power-on state for RAM; Random Values (Default)|All 0s|All 1s" },
+			{ MesenHLE, "Use HLE coprocessor emulation; disabled|enabled" },
 			{ NULL, NULL },
 		};
 
@@ -385,11 +387,16 @@ extern "C" {
 			}
 		}
 
+		if(readVariable(MesenHLE, var)) {
+			string value = string(var.value);
+			emulation.EnableHleCoprocessor = (value == "enabled");
+		}
+
 		if(readVariable(MesenBlendHighRes, var)) {
 			string value = string(var.value);
 			video.BlendHighResolutionModes = (value == "enabled");
 		}
-		
+
 		if(readVariable(MesenCubicInterpolation, var)) {
 			string value = string(var.value);
 			audio.EnableCubicInterpolation = (value == "enabled");
@@ -513,7 +520,31 @@ extern "C" {
 	RETRO_API void retro_cheat_set(unsigned index, bool enabled, const char *codeStr)
 	{
 		if(codeStr) {
-			_console->GetCheatManager()->AddStringCheat(codeStr);
+			int chl = 0;
+			string code = codeStr;
+			if(code[4] == '-') {
+				for(;;) {
+					string code1 = code.substr((0 + chl), 9);
+					_console->GetCheatManager()->AddStringCheat(code1);
+					if(code[(9 + chl)] != '+') {
+						return;
+					}
+					chl = (chl + 10);
+				}
+			}
+			else if(code[8] == '+') {
+				for(;;) {
+					string code1 = code.substr((0 + chl), 8);
+					_console->GetCheatManager()->AddStringCheat(code1);
+					if(code[(8 + chl)] != '+') {
+						return;
+					}
+					chl = (chl + 9);
+				}
+			}
+			else {
+				_console->GetCheatManager()->AddStringCheat(code);
+			}
 		}
 	}
 
