@@ -44,7 +44,7 @@ SEVENZIP_DIR    += ../SevenZip
 CORE_DIR        += ../Core
 UTIL_DIR        += ../Utilities
 
-TARGET_NAME := mesen-s
+TARGET_NAME := mesen-sx
 LIBM        = -lm
 
 ifeq ($(ARCHFLAGS),)
@@ -336,7 +336,7 @@ endif
 CFLAGS   += -D LIBRETRO $(fpic)
 CXXFLAGS += -D LIBRETRO $(fpic) -std=c++14
 
-ALTTARGET := $(subst mesen-s,mesens,$(TARGET))
+ALTTARGET := $(subst mesen-sx,mesensx,$(TARGET))
 
 all: $(TARGET)
 
