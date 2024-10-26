@@ -44,7 +44,7 @@ SEVENZIP_DIR    += ../SevenZip
 CORE_DIR        += ../Core
 UTIL_DIR        += ../Utilities
 
-TARGET_NAME := mesen-s
+TARGET_NAME := mesen-sx
 LIBM        = -lm
 
 ifeq ($(ARCHFLAGS),)
