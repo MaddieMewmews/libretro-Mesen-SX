@@ -1,31 +1,17 @@
-# Deprecated
+# Mesen SX
 
-Now that [Mesen2](https://mesen.ca/) exists, this fork has no reason to exist and I suggest using Mesen2 instead.
+Mesen is a cross-platform libretro core for NES/Famicom built in C++.  [Older standalone versions](https://github.com/NovaSquirrel/Mesen-SX/releases) are available elsewhere.
 
-# Mesen-S
-
-Mesen-S is a cross-platform SNES emulator for Windows & Linux built in C++ and C#.
-If you want to support this project, please consider making a donation:
-
-[![Donate](https://www.mesen.ca/images/donate.png)](https://www.mesen.ca/Donate.php)
-
-## Development Builds
-
-Development builds of the latest commit are available from GitHub Actions. For release builds, see the **Releases** tab on GitHub.
-
-**Warning:** These are development builds and may be ***unstable***. Using them may also increase the chances of your settings being corrupted, or having issues when upgrading to the next official release. Additionally, these builds are currently not optimized via PGO and will typically run a bit slower than the official release builds.
-
-Follow either of these, select the top-most entry in the list, and then click the link under "Artifacts" near the bottom.
-
-Windows: [![Build status](https://github.com/NovaSquirrel/Mesen-S/actions/workflows/win-build.yml/badge.svg)](https://github.com/NovaSquirrel/Mesen-S/actions/workflows/win-build.yml)
-
-Linux: [![Build status](https://github.com/NovaSquirrel/Mesen-S/actions/workflows/linux-build.yml/badge.svg)](https://github.com/NovaSquirrel/Mesen-S/actions/workflows/linux-build.yml)
+[Website (https://www.mesen.ca)](https://www.mesen.ca)  
+[Documentation](https://docs.libretro.com/library/mesen/)
 
 ## Releases
 
-### Windows / Ubuntu
+### Windows / Linux
 
-The latest version is available from the [releases tab on GitHub](https://github.com/SourMesen/Mesen-S/releases).
+The latest version is available from the [releases tab on GitHub](https://github.com/MaddieMewmews/libretro-Mesen-SX/releases).
+Arch Linux has a package on the [AUR for Arch Linux](https://aur.archlinux.org/packages/libretro-mesen-sx-git). 
+OpenSUSE Tumbleweed has a package on the OBS, however the repository it's in hasn't been updated in a long time.
 
 ## Compiling
 
