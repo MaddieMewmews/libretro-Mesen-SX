@@ -549,3 +549,33 @@ uint16_t Spc::GetDirectAddress(uint8_t offset)
 {
 	return (CheckFlag(SpcFlags::DirectPage) ? 0x100 : 0) + offset;
 }
+void Spc::SetReg(SpcRegister reg, uint16_t value)
+{
+	switch (reg)
+	{
+	case SpcRegister::SpcRegPC:
+	{
+		_state.PC = value;
+	} break;
+	case SpcRegister::SpcRegA:
+	{
+		_state.A = value & 0xFF;
+	} break;
+	case SpcRegister::SpcRegX:
+	{
+		_state.X = value & 0xFF;
+	} break;
+	case SpcRegister::SpcRegY:
+	{
+		_state.Y = value & 0xFF;
+	} break;
+	case SpcRegister::SpcRegSP:
+	{
+		_state.SP = value & 0xFF;
+	} break;
+	case SpcRegister::SpcRegPS:
+	{
+		_state.PS = value & 0xFF;
+	} break;
+	}
+}

@@ -381,7 +381,7 @@ enum class NecDspRegister : uint8_t
 	NecDspRegSP
 };
 
-enum class SpcRegister : uint8_t
+enum class SpcRegister : uint16_t
 {
 	SpcRegPC,
 	SpcRegA,
